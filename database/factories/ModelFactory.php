@@ -1,20 +1,28 @@
 <?php
 
+use Illuminate\Support\Facades\Hash;
+use Faker\Generator as Faker;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
 |--------------------------------------------------------------------------
 |
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\User::class, function (Faker $faker) {
     return [
-        'first_name' => $faker->first_name,
-        'last_name' => $faker->last_name,
-        'email' => $faker->email,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'email' => $faker->safeEmail,
+    ];
+});
+
+$factory->define(App\Organization::class, function (Faker $faker) {
+    return [
+        'name' => $faker->company,
+        'email' => $faker->safeEmail,
+        'password' => Hash::make('secret'),
+
     ];
 });
