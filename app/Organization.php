@@ -29,9 +29,9 @@ class Organization extends Model
         'password',
     ];
 
-    public function users() 
+    public function users()
     {
-        return $this->hasMany('App\User');
+        return $this->belongsToMany('App\User');
     }
 
     public function setPasswordAttribute($password)

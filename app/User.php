@@ -34,8 +34,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * Get the organization that owns the user
      *
      */
-    public function organization() 
+    public function organization()
     {
-        return $this->belongsTo('App\Organzation', 'foreign_key');
+        return $this->belongsToMany('App\Organization');
     }
 }

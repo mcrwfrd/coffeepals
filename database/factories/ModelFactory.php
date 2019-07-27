@@ -22,7 +22,6 @@ $factory->define(App\Organization::class, function (Faker $faker) {
     return [
         'name' => $faker->company,
         'email' => $faker->safeEmail,
-        'password' => Hash::make('secret'),
-
+        'password' => 'secret',
     ];
 });
