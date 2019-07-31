@@ -3,9 +3,7 @@
 namespace App;
 
 use Illuminate\Auth\Authenticatable;
-use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Support\Facades\Hash;
 
 class Organization extends Model
@@ -39,6 +37,20 @@ class Organization extends Model
         if (!empty($password))
         {
             $this->attributes['password'] = Hash::make($password);
+        }
+    }
+
+    public function pairAllUsers() {
+        $users = $this->users()->inRandomOrder()->get();
+
+        // TODO: assumes even number of users for this organization
+
+        while (!$users->isEmpty()) {
+            $user = $users->pop();
+            $partner = $users->pop();
+
+            $user->partners()->save($partner);
+            $partner->partners()->save($user);
         }
     }
 }

@@ -38,4 +38,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->belongsToMany('App\Organization');
     }
+
+    public function partners()
+    {
+        return $this->belongsToMany('App\User', 'user_user', 'user', 'partner');
+    }
 }
